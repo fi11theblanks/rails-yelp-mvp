@@ -8,11 +8,8 @@ Rails.application.routes.draw do
   # Render dynamic PWA files from app/views/pwa/* (remember to link manifest in application.html.erb)
   # get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
   # get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-  # Defines the root path route ("/")
-  # root "posts#index"
-  get "restaurants", to: "restaurants#index", as: :restaurant
-  post "restaurants", to: "restaurants#show"
-  get "restaurants", to: "restaurants#new"
-  get "restaurants", to: "restaurants#create"
-  get "restaurants", to: "restaurants#index"
+  # Defines the root path ro
+  resources :restaurants, only: [ :index, :show, :new, :create ] do
+    resources :reviews, only: [ :new, :create ]
+  end
 end
